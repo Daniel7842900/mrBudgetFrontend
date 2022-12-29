@@ -6,7 +6,6 @@ const TextInput = (props) => {
     value,
     type,
     autoComplete,
-    onChange,
     lable,
     placeholder,
     className,
