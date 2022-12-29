@@ -1,5 +1,6 @@
 import pepe from "../assets/images/pepe.png";
 import { Link } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
 
 function Login() {
   return (
@@ -15,7 +16,8 @@ function Login() {
             Sign in to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="/login" method="POST">
+        <LoginForm />
+        {/* <form className="mt-8 space-y-6" action="/login" method="POST">
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -94,9 +96,8 @@ function Login() {
                 <span>Create an account</span>
               </div>
             </Link>
-            {/* <a href="/signup"></a> */}
           </div>
-        </form>
+        </form> */}
       </div>
     </div>
   );
