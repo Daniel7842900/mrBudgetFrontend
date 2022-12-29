@@ -3,6 +3,7 @@ const Button = (props) => {
 
   return (
     <button type={type} className={className}>
+      {/* Use React Composition to render children components */}
       {props.children}
       <span>{text}</span>
     </button>

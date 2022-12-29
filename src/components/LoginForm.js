@@ -1,7 +1,9 @@
 import TextInput from "./TextInput";
-import { Link } from "react-router-dom";
 import Button from "./Button";
 import LockSvg from "./LockSvg";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = (props) => {
   return (
@@ -43,7 +45,7 @@ const LoginForm = (props) => {
           >
             Remember me
           </label>
-        </div>
+        </div>D
       </div> */}
       <div>
         <Button
@@ -58,7 +60,10 @@ const LoginForm = (props) => {
         <Link to="/signup">
           <div className="group relative w-full flex justify-center py-2 px-4 my-1 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-              <i className="fas fa-user-plus h-5 w-5 py-0.5 px-1 text-gray-300 group-hover:text-gray-200"></i>
+              <FontAwesomeIcon
+                icon={faUserPlus}
+                className="h-5 w-5 py-0.5 px-1 text-gray-300 group-hover:text-gray-200"
+              />
             </span>
             <span>Create an account</span>
           </div>
