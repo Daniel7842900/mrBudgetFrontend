@@ -1,5 +1,5 @@
-import TextInput from "./TextInput";
-import Button from "./Button";
+import TextInput from "../../../components/TextInput";
+import Button from "../../../components/Button";
 import LockSvg from "./LockSvg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -68,7 +68,6 @@ const LoginForm = (props) => {
             <span>Create an account</span>
           </div>
         </Link>
-        {/* <a href="/signup"></a> */}
       </div>
     </form>
   );

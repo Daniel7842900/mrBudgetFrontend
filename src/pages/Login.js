@@ -1,5 +1,5 @@
 import pepe from "../assets/images/pepe.png";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../features/authentication/components/LoginForm";
 
 function Login() {
   return (
