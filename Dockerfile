@@ -20,7 +20,6 @@ RUN npm ci
 
 # Build the app
 RUN npm run build
-
 # ==== Stage 0 end ====
 
 # ==== Stage 1 ====
@@ -41,5 +40,4 @@ EXPOSE 80
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
-
 # ==== Stage 1 end ====

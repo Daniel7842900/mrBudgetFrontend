@@ -4,16 +4,42 @@ import LockSvg from "./LockSvg";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const LoginForm = (props) => {
+  const [account, setAccount] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("login form submitted");
+  };
+
+  const handleChange = (e) => {
+    // Use spread operator(...) to pass in previous state
+    setAccount({
+      ...account,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
-    <form className="mt-8 space-y-6" action="/login" method="POST">
+    <form
+      className="mt-8 space-y-6"
+      // action="/login"
+      // method="POST"
+      onSubmit={handleSubmit}
+    >
       <input type="hidden" name="remember" value="true" />
       <div className="rounded-md shadow-sm -space-y-px">
         <TextInput
           id="email-address"
           name="email"
           type="email"
+          value={account.email}
+          onChange={handleChange}
           autoComplete="email"
           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           placeholder="Email address"
@@ -23,6 +49,8 @@ const LoginForm = (props) => {
           id="password"
           name="password"
           type="password"
+          value={account.password}
+          onChange={handleChange}
           autoComplete="current-password"
           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           placeholder="Password"

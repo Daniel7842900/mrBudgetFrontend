@@ -3,8 +3,10 @@ import React from "react";
 const TextInput = (props) => {
   const {
     id,
-    value,
+    name,
     type,
+    value,
+    onChange,
     autoComplete,
     lable,
     placeholder,
@@ -19,8 +21,10 @@ const TextInput = (props) => {
       </label>
       <input
         id={id}
-        name={value}
+        name={name}
         type={type}
+        value={value}
+        onChange={onChange}
         autoComplete={autoComplete}
         required={required}
         className={className}
