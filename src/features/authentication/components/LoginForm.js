@@ -5,22 +5,47 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import Joi from "joi";
 
 const LoginForm = (props) => {
-  const [account, setAccount] = useState({
-    email: "",
-    password: "",
+  let { data, error, setData, setError } = props;
+
+  // Schema for login form
+  const schema = Joi.object({
+    email: Joi.string().required().label("Email"),
+    password: Joi.string().required().label("Password"),
   });
 
+  // Validate all input fields when submitted
+  const validate = () => {
+    const result = schema.validate({ ...data });
+    console.log(result);
+  };
+
+  // Validate each input field on change
+  const validateProperty = ({ name, value }) => {
+    // Get validation logic of email from above schema
+    const propertySchema = schema.extract(name);
+
+    // Get error from validation. If there is non, it's undefined.
+    const { error } = propertySchema.validate(value);
+
+    return setError(error);
+  };
+
   const handleSubmit = (e) => {
+    // Prevent a page to submit the form and reloading
     e.preventDefault();
     console.log("login form submitted");
+    validate();
   };
 
   const handleChange = (e) => {
+    validateProperty(e.target);
+
     // Use spread operator(...) to pass in previous state
-    setAccount({
-      ...account,
+    setData({
+      ...data,
       [e.target.name]: e.target.value,
     });
   };
@@ -38,23 +63,23 @@ const LoginForm = (props) => {
           id="email-address"
           name="email"
           type="email"
-          value={account.email}
+          value={data.email}
           onChange={handleChange}
           autoComplete="email"
           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           placeholder="Email address"
-          required={true}
+          // required={true}
         />
         <TextInput
           id="password"
           name="password"
           type="password"
-          value={account.password}
+          value={data.password}
           onChange={handleChange}
           autoComplete="current-password"
           className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
           placeholder="Password"
-          required={true}
+          // required={true}
         />
       </div>
 
