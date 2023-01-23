@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Joi from "joi";
+import axios from "axios";
 
 const LoginForm = (props) => {
   let { data, error, setData, setError } = props;
@@ -33,11 +34,21 @@ const LoginForm = (props) => {
     return setError(error);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Prevent a page to submit the form and reloading
     e.preventDefault();
     console.log("login form submitted");
     validate();
+
+    console.log("modified endpoint");
+    console.log("data: ", data);
+
+    try {
+      const res = await axios.post("/api/user/login", data);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleChange = (e) => {
