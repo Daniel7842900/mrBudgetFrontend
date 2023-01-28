@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_ENDPOINT = "a/api/user";
+const API_ENDPOINT = "/api/user";
 
 const login = async (data) => {
   // Get the user info by calling backend
