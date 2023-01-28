@@ -9,7 +9,7 @@ const login = async (data) => {
 
   // Store response in local storage in browser
   if (response.data.payload.token) {
-    localStorage.setItem("user", JSON.stringify(response.data.payload.token));
+    localStorage.setItem("user", JSON.stringify(response.data.payload));
   }
 
   return response;

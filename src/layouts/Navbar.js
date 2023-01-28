@@ -2,11 +2,12 @@ import pepe from "../assets/images/pepe.png";
 import otter from "../assets/images/otter.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import AuthService from "../services/authentication/AuthService";
 
 function Navbar() {
   const [showProfileNav, setShowProfileNav] = useState(false);
   const [showMobileNav, setShowMobileNav] = useState(false);
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const currentUser = AuthService.getCurrentUser();
 
   const handleshowProfileNav = () => {
     setShowProfileNav(!showProfileNav);
@@ -225,9 +226,11 @@ function Navbar() {
               <div className="ml-3">
                 <div className="text-base font-medium text-green-500">
                   {/* <%= _.startCase(user.firstName) %> <%= _.startCase(user.lastName) %> */}
+                  {currentUser.firstName} {currentUser.lastName}
                 </div>
                 <div className="text-sm font-medium text-green-500">
                   {/* <%= user.email %> */}
+                  {currentUser.email}
                 </div>
               </div>
             </div>
