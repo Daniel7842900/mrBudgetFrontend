@@ -1,15 +1,29 @@
 import TextInput from "../../../components/TextInput";
 import Button from "../../../components/Button";
 import LockSvg from "./LockSvg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 import Joi from "joi";
 import axios from "axios";
+import AuthService from "../../../services/authentication/AuthService";
+
+axios.interceptors.response.use(null, (error) => {
+  const expectedError =
+    error.response &&
+    error.response.status >= 400 &&
+    error.response.status < 500;
+
+  if (!expectedError) {
+    console.log("Logging the unexpected error", error);
+  }
+
+  return Promise.reject(error);
+});
 
 const LoginForm = (props) => {
   let { data, error, setData, setError } = props;
+  const navigate = useNavigate();
 
   // Schema for login form
   const schema = Joi.object({
@@ -28,7 +42,7 @@ const LoginForm = (props) => {
     // Get validation logic of email from above schema
     const propertySchema = schema.extract(name);
 
-    // Get error from validation. If there is non, it's undefined.
+    // Get error from validation. If there is none, it's undefined.
     const { error } = propertySchema.validate(value);
 
     return setError(error);
@@ -38,16 +52,25 @@ const LoginForm = (props) => {
     // Prevent a page to submit the form and reloading
     e.preventDefault();
     console.log("login form submitted");
+
+    // Validate the form
     validate();
 
     console.log("modified endpoint");
     console.log("data: ", data);
 
     try {
-      const res = await axios.post("/api/user/login", data);
-      console.log(res);
+      await AuthService.login(data);
+
+      // Redirect to dashboard page
+      navigate("/dashboard");
+
+      // Refresh the page
+      window.location.reload();
     } catch (err) {
       console.log(err);
+      const error = { message: "Email or Password is invalid" };
+      return setError(error);
     }
   };
 
