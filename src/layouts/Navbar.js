@@ -1,7 +1,7 @@
 import pepe from "../assets/images/pepe.png";
 import otter from "../assets/images/otter.jpg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthService from "../services/authentication/AuthService";
 
 function Navbar() {
@@ -16,6 +16,20 @@ function Navbar() {
   const handleShowMobileNav = () => {
     setShowMobileNav(!showMobileNav);
   };
+
+  /**
+   * Handle the case where mobile nav was expanded,
+   * however, the user increased the screen size without closing it
+   */
+  const handleResize = () => {
+    if (showMobileNav === true && window.innerWidth >= 768) {
+      setShowMobileNav(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  });
 
   return (
     <nav className="bg-white relative">
