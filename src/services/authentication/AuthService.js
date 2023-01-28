@@ -15,8 +15,13 @@ const login = async (data) => {
   return response;
 };
 
+const getCurrentUser = () => {
+  return JSON.parse(localStorage.getItem("user"));
+};
+
 const AuthService = {
   login: login,
+  getCurrentUser: getCurrentUser,
 };
 
 export default AuthService;
