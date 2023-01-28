@@ -23,7 +23,7 @@ function Navbar() {
    */
   const handleResize = () => {
     if (showMobileNav === true && window.innerWidth >= 768) {
-      setShowMobileNav(false);
+      setShowMobileNav(!showMobileNav);
     }
   };
 
