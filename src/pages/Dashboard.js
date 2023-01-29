@@ -3,7 +3,6 @@ import Navbar from "../layouts/Navbar";
 function Dashboard() {
   return (
     <div className="bg-cyan-600">
-      {/* <%- include('../../partial/nav/index'); %> */}
       <Navbar />
       <header className="bg-cyan-600">
         <div className="flex items-center justify-between max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 bg-cyan-600 border-b-2 border-white border-solid">
